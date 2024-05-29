@@ -7,23 +7,29 @@ from wagtail.blocks import (
     TextBlock,
 )
 from wagtail.embeds.blocks import EmbedBlock
-from wagtail.images.blocks import ImageChooserBlock
+# from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.blocks import ImageBlock
 
 
-class ImageBlock(StructBlock):
-    """
-    Custom `StructBlock` for utilizing images with associated caption and
-    attribution data
-    """
+# class ImageBlock(StructBlock):
+#     """
+#     Custom `StructBlock` for utilizing images with associated caption and
+#     attribution data
+#     """
 
-    image = ImageChooserBlock(required=True)
-    caption = CharBlock(required=False)
-    attribution = CharBlock(required=False)
+#     image = ImageChooserBlock(required=True)
+#     caption = CharBlock(required=False)
+#     attribution = CharBlock(required=False)
 
-    class Meta:
-        icon = "image"
-        template = "blocks/image_block.html"
+#     class Meta:
+#         icon = "image"
+#         template = "blocks/image_block.html"
 
+# from django import forms
+# class ImageBlock(ImageChooserBlock):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.alt_text_field = forms.CharField(widget=forms.Textarea)
 
 class HeadingBlock(StructBlock):
     """
@@ -59,6 +65,8 @@ class BlockQuote(StructBlock):
         icon = "openquote"
         template = "blocks/blockquote.html"
 
+class NiceBlock(StructBlock):
+    pic = ImageBlock()
 
 # StreamBlocks
 class BaseStreamBlock(StreamBlock):

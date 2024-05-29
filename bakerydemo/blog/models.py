@@ -12,8 +12,7 @@ from wagtail.fields import StreamField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
 
-from bakerydemo.base.blocks import BaseStreamBlock
-
+from bakerydemo.base.blocks import BaseStreamBlock, NiceBlock
 
 class BlogPersonRelationship(Orderable, models.Model):
     """
@@ -66,6 +65,7 @@ class BlogPage(Page):
     body = StreamField(
         BaseStreamBlock(), verbose_name="Page body", blank=True, use_json_field=True
     )
+    new_body = StreamField([("image", NiceBlock())], blank=True)
     subtitle = models.CharField(blank=True, max_length=255)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date_published = models.DateField("Date article published", blank=True, null=True)
@@ -75,6 +75,7 @@ class BlogPage(Page):
         FieldPanel("introduction"),
         FieldPanel("image"),
         FieldPanel("body"),
+        FieldPanel("new_body"),
         FieldPanel("date_published"),
         MultipleChooserPanel(
             "blog_person_relationship",
